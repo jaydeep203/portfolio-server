@@ -5,7 +5,7 @@ const prisma = require("../config");
 
 router.get("/project", async(req, res)=>{
 
-    const skip = parseInt(req.query.skip) || 0;
+    const skip = parseInt(req.query.skip)*5 || 0;
     const limit = parseInt(req.query.limit) || 5;
 
     try{
