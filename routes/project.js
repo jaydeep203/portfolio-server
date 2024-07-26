@@ -5,14 +5,17 @@ const prisma = require("../config");
 
 router.get("/project", async(req, res)=>{
 
-    const skip = req.query.skip || 0;
-    const limit = req.query.limit || 5;
+    const skip = parseInt(req.query.skip) || 0;
+    const limit = parseInt(req.query.limit) || 5;
 
     try{
 
         const projects = await prisma.project.findMany({
             skip,
-            take:limit
+            take:limit,
+            orderBy:{
+                createdAt:"desc"
+            }
         });
 
         return res.status(201).json(projects);
